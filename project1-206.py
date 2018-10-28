@@ -15,6 +15,7 @@ def getData(file):
 	lines = inFile.readlines()
 	inFile.close()
 
+	#The list that will hold the dictionary objects
 	dictList = []
 
 	#looping through the lines and loading them into a dictionary
@@ -38,14 +39,24 @@ def getData(file):
 		dictList.append(dataDict)
 
 	return dictList
-	pass
 
-#def mySort(data,col):
-# Sort based on key/column
-#Input: list of dictionaries and col (key) to sort on
-#Output: Return the first item in the sorted list as a string of just: firstName lastName
+def mySort(data,col):
+	# Sort based on key/column
+	#Input: list of dictionaries and col (key) to sort on
+	#Output: Return the first item in the sorted list as a string of just: firstName lastName
 
-#	pass
+	studentList = []
+
+	for d in data:
+		studentList.append(d[col])
+
+		studentList.sort()
+		
+		if studentList[0] == d[col]:
+			name = d["First"]+" "+d["Last"]
+
+	print(name)
+	return name
 
 
 #def classSizes(data):
@@ -55,11 +66,21 @@ def getData(file):
 # descending order
 # [('Senior', 26), ('Junior', 25), ('Freshman', 21), ('Sophomore', 18)]
 
+#	classDict = {}
+
+#	for d in data:
+#		cs = d["Class"]
+
+#		classDict[csKey] = float(classDict.get(cs,0) + cs)
+#		csSort = sorted(classDict.items(), key=lambda l:l[1], reverse = True)
+
+#	print(csSort)
+#	return csSort
 #	pass
 
 
 #def findMonth(a):
-# Find the most common birth month form this data
+# Find the most common birth month from this data
 # Input: list of dictionaries
 # Output: Return the month (1-12) that had the most births in the data
 
@@ -68,7 +89,7 @@ def getData(file):
 #def mySortPrint(a,col,fileName):
 #Similar to mySort, but instead of returning single
 #Student, the sorted data is saved to a csv file.
-# as fist,last,email
+# as first,last,email
 #Input: list of dictionaries, col (key) to sort by and output file name
 #Output: No return value, but the file is written
 
@@ -90,14 +111,14 @@ def getData(file):
 
 ## We have provided simple test() function used in main() to print what each function returns vs. what it's supposed to return.
 def test(got, expected, pts):
-  score = 0;
-  if got == expected:
-    score = pts
-    print(" OK ", end=" ")
-  else:
-    print (" XX ", end=" ")
-  print("Got: ",got, "Expected: ",expected)
-  return score
+	score = 0;
+	if got == expected:
+		score = pts
+		print(" OK ", end=" ")
+	else:
+		print (" XX ", end=" ")
+	print("Got: ",got, "Expected: ",expected)
+	return score
 
 
 # Provided main() calls the above functions with interesting inputs, using test() to check if each result is correct or not.
@@ -109,17 +130,17 @@ def main():
 	total += test(type(data),type([]),50)
 
 	print()
-#	print("First student sorted by First name:")
-#	total += test(mySort(data,'First'),'Abbot Le',25)
-#	total += test(mySort(data2,'First'),'Adam Rocha',25)
+	print("First student sorted by First name:")
+	total += test(mySort(data,'First'),'Abbot Le',25)
+	total += test(mySort(data2,'First'),'Adam Rocha',25)
 
-#	print("First student sorted by Last name:")
-#	total += test(mySort(data,'Last'),'Elijah Adams',25)
-#	total += test(mySort(data2,'Last'),'Elijah Adams',25)
+	print("First student sorted by Last name:")
+	total += test(mySort(data,'Last'),'Elijah Adams',25)
+	total += test(mySort(data2,'Last'),'Elijah Adams',25)
 
-#	print("First student sorted by Email:")
-#	total += test(mySort(data,'Email'),'Hope Craft',25)
-#	total += test(mySort(data2,'Email'),'Orli Humphrey',25)
+	print("First student sorted by Email:")
+	total += test(mySort(data,'Email'),'Hope Craft',25)
+	total += test(mySort(data2,'Email'),'Orli Humphrey',25)
 
 #	print("\nEach grade ordered by size:")
 #	total += test(classSizes(data),[('Junior', 28), ('Senior', 27), ('Freshman', 23), ('Sophomore', 22)],25)
