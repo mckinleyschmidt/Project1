@@ -51,32 +51,46 @@ def mySort(data,col):
 		studentList.append(d[col])
 
 		studentList.sort()
-		
+
+		#if the first item of the list = the col, print the name
 		if studentList[0] == d[col]:
 			name = d["First"]+" "+d["Last"]
 
-	print(name)
 	return name
 
 
-#def classSizes(data):
+def classSizes(data):
 # Create a histogram
 # Input: list of dictionaries
 # Output: Return a list of tuples sorted by the number of students in that class in
 # descending order
 # [('Senior', 26), ('Junior', 25), ('Freshman', 21), ('Sophomore', 18)]
 
-#	classDict = {}
+	classList = []
 
-#	for d in data:
-#		cs = d["Class"]
+	for d in data:
+		classList.append(d["Class"])
 
-#		classDict[csKey] = float(classDict.get(cs,0) + cs)
-#		csSort = sorted(classDict.items(), key=lambda l:l[1], reverse = True)
+		f = 0
+		soph = 0
+		j = 0
+		sen = 0
 
-#	print(csSort)
-#	return csSort
-#	pass
+		for i in classList:
+			if i == "Freshman":
+				f += 1
+			elif i == "Sophomore":
+				soph += 1
+			elif i == "Junior":
+				j += 1
+			elif i == "Senior":
+				sen += 1
+
+		histo = [("Freshman", f), ("Sophomore", soph), ("Junior", j), ("Senior", sen)]
+
+		histo = sorted(histo, key=lambda k:k[1], reverse = True)
+		
+	return histo
 
 
 #def findMonth(a):
@@ -142,9 +156,9 @@ def main():
 	total += test(mySort(data,'Email'),'Hope Craft',25)
 	total += test(mySort(data2,'Email'),'Orli Humphrey',25)
 
-#	print("\nEach grade ordered by size:")
-#	total += test(classSizes(data),[('Junior', 28), ('Senior', 27), ('Freshman', 23), ('Sophomore', 22)],25)
-#	total += test(classSizes(data2),[('Senior', 26), ('Junior', 25), ('Freshman', 21), ('Sophomore', 18)],25)
+	print("\nEach grade ordered by size:")
+	total += test(classSizes(data),[('Junior', 28), ('Senior', 27), ('Freshman', 23), ('Sophomore', 22)],25)
+	total += test(classSizes(data2),[('Senior', 26), ('Junior', 25), ('Freshman', 21), ('Sophomore', 18)],25)
 
 #	print("\nThe most common month of the year to be born is:")
 #	total += test(findMonth(data),3,15)
