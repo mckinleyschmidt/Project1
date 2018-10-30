@@ -2,6 +2,7 @@ import os
 import filecmp
 from dateutil.relativedelta import *
 from datetime import date
+import collections
 
 
 def getData(file):
@@ -89,25 +90,37 @@ def classSizes(data):
 		histo = [("Freshman", f), ("Sophomore", soph), ("Junior", j), ("Senior", sen)]
 
 		histo = sorted(histo, key=lambda k:k[1], reverse = True)
-		
+
 	return histo
 
 
-#def findMonth(a):
+def findMonth(data):
 # Find the most common birth month from this data
 # Input: list of dictionaries
 # Output: Return the month (1-12) that had the most births in the data
 
-#	pass
+	monthList = []
 
-#def mySortPrint(a,col,fileName):
+	for d in data:
+		monthList.append(d["DOB"])
+		months = [i.split("/")[0] for i in monthList]
+
+		months.sort()
+
+		freq = collections.Counter(months)
+
+		commonMonth = [i[0] for i in freq.most_common()]
+
+	return commonMonth[0]
+
+def mySortPrint(a,col,fileName):
 #Similar to mySort, but instead of returning single
 #Student, the sorted data is saved to a csv file.
 # as first,last,email
 #Input: list of dictionaries, col (key) to sort by and output file name
 #Output: No return value, but the file is written
 
-#	pass
+	pass
 
 #def findAge(a):
 # def findAge(a):
@@ -160,9 +173,9 @@ def main():
 	total += test(classSizes(data),[('Junior', 28), ('Senior', 27), ('Freshman', 23), ('Sophomore', 22)],25)
 	total += test(classSizes(data2),[('Senior', 26), ('Junior', 25), ('Freshman', 21), ('Sophomore', 18)],25)
 
-#	print("\nThe most common month of the year to be born is:")
-#	total += test(findMonth(data),3,15)
-#	total += test(findMonth(data2),3,15)
+	print("\nThe most common month of the year to be born is:")
+	total += test(findMonth(data),3,15)
+	total += test(findMonth(data2),3,15)
 
 #	print("\nSuccessful sort and print to file:")
 #	mySortPrint(data,'Last','results.csv')
